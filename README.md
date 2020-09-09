@@ -76,3 +76,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Installation steps
+
+Terminal:   composer create-project laravel/laravel (nameProject) 7.0
+            composer require nuwave/lighthouse
+            composer require mll-lab/laravel-graphql-playground
+            php artisan vendor:publish --tag=lighthouse-schema
+
+
