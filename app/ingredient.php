@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ingredient extends Model
 {
+
+    protected $fillable=['name','calories'];
+
     public function pizza(): BelongsTo
     {
-        return $this->belongsTo(Ingredient::class);
+        return $this->belongsTo(pizza::class);
     }
 }

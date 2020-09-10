@@ -8,9 +8,12 @@ scalar DateTime
 type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
+
     pizzas: [pizza!]! @all
     pizza(id: Int! @eq): pizza @find
-    # ingredients:[Ingredient!]! @all
+
+    ingredients: [Ingredient!]! @all
+    ingredient(id: Int! @eq): Ingredient @find
 }
 
 type User {
@@ -25,27 +28,35 @@ type pizza {
     id: Int!
     name: String
     origin: String
-    # ingredients: [Ingredient!]!
+    ingredients: [Ingredient!] @hasMany
 }
 
-# type Ingredient {
-#     id: Int!
-#     name: String
-#     calories: String
-# }
+type Ingredient {
+    id: Int!
+    name: String
+    calories: String
+    pizza: pizza! @belongsTo
+}
 
-input createPizzaInput{
+input createPizzaInput {
     # id: Int!
     name: String!
     origin: String!
 }
-input updatePizzasInput{
-    name:String!
-    origin:String!
+input updatePizzasInput {
+    name: String!
+    origin: String!
 }
-type Mutation{
-    createPizza(input:createPizzaInput! @spread):pizza @create
-    updatePizza(id:Int!,input:updatePizzasInput! @spread):pizza @update
+input createIngredientInput {
+    # id: Int!
+    name: String!
+    calories: String!
+}
+type Mutation {
+    createPizza(input: createPizzaInput! @spread): pizza @create
+    updatePizza(id: Int!, input: updatePizzasInput! @spread): pizza @update
+
+    createIngredient(input: createIngredientInput! @spread): Ingredient @create
 }
 # type Mutation{
 #     createPizza(name:String!):pizza @create

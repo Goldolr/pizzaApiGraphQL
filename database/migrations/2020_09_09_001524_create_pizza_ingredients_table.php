@@ -17,6 +17,7 @@ class CreatePizzaIngredientsTable extends Migration
             $table->integer('pizza_id');
             $table->integer('ingredient_id');
             $table->integer('id', true);
+            $table->timestamps();
         });
     }
 

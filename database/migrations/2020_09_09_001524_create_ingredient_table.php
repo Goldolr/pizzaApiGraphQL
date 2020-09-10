@@ -13,10 +13,11 @@ class CreateIngredientTable extends Migration
      */
     public function up()
     {
-        Schema::create('ingredient', function (Blueprint $table) {
-            $table->integer('id')->primary('ingredient_pkey');
+        Schema::create('ingredients', function (Blueprint $table) {
+            $table->integer('id',true);
             $table->text('name')->nullable();
             $table->text('calories')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateIngredientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ingredient');
+        Schema::dropIfExists('ingredients');
     }
 }
