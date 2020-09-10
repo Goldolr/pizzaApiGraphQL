@@ -14,21 +14,34 @@ type Query {
 }
 
 type User {
-    id: ID!
+    id: Int!
     name: String!
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
 }
+
 type pizza {
     id: Int!
     name: String
     origin: String
-    ingredients: [Ingredient!]!
+    # ingredients: [Ingredient!]!
 }
 
-type Ingredient {
-    id: Int!
-    name: String
-    calories: String
+# type Ingredient {
+#     id: Int!
+#     name: String
+#     calories: String
+# }
+
+input createPizzaInput{
+    # id: Int!
+    name: String!
+    origin: String!
 }
+type Mutation{
+    createPizza(input:createPizzaInput! @spread):pizza @create
+}
+# type Mutation{
+#     createPizza(name:String!):pizza @create
+# }

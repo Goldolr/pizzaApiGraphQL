@@ -17,6 +17,7 @@ class CreatePizzaTable extends Migration
             $table->integer('id', true);
             $table->text('name')->nullable();
             $table->text('origin')->nullable();
+            $table->timestamps();
         });
     }
 
