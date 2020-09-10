@@ -39,8 +39,13 @@ input createPizzaInput{
     name: String!
     origin: String!
 }
+input updatePizzasInput{
+    name:String!
+    origin:String!
+}
 type Mutation{
     createPizza(input:createPizzaInput! @spread):pizza @create
+    updatePizza(id:Int!,input:updatePizzasInput! @spread):pizza @update
 }
 # type Mutation{
 #     createPizza(name:String!):pizza @create
