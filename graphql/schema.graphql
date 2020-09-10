@@ -28,7 +28,7 @@ type pizza {
     id: Int!
     name: String
     origin: String
-    ingredients: [Ingredient!] @hasMany
+    ingredients: [Ingredient!] @belongsTo
 }
 
 type Ingredient {
@@ -42,6 +42,7 @@ input createPizzaInput {
     # id: Int!
     name: String!
     origin: String!
+    ingredient_id:Int!
 }
 input updatePizzasInput {
     name: String!
@@ -62,6 +63,9 @@ input updateIngredientInput{
 
 type Mutation {
     createPizza(input: createPizzaInput! @spread): pizza @create
+    
+    # @inject(context:"ingredient.id",name:"ingredient_id") @guard(with:[api])
+
     updatePizza(id: Int!, input: updatePizzasInput! @spread): pizza @update
 
     createIngredient(input: createIngredientInput! @spread): Ingredient @create

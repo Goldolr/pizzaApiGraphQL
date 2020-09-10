@@ -17,9 +17,9 @@ class pizza extends Model
     // {
     //     return $this->hasMany(Ingredient::class);
     // }
-    protected $fillable = ['name', 'origin'];
-    public function ingredients(): HasMany
+    protected $fillable = ['name','ingredient_id', 'origin'];
+    public function ingredients(): BelongsTo
     {
-        return $this->hasMany(ingredient::class);
+        return $this->belongsTo(ingredient::class);
     }
 }
