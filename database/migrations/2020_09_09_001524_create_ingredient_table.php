@@ -15,9 +15,11 @@ class CreateIngredientTable extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->integer('id',true);
+            // $table->unsignedBigInteger('pizza_id');
             $table->text('name')->nullable();
             $table->text('calories')->nullable();
             $table->timestamps();
+            // $table->foreign('pizza_id')->references('id')->on('pizza')->onDelete('cascade');
         });
     }
 

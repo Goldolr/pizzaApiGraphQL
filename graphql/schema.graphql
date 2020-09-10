@@ -35,7 +35,7 @@ type Ingredient {
     id: Int!
     name: String
     calories: String
-    pizza: pizza! @belongsTo
+    # pizza: pizza! @belongsTo
 }
 
 input createPizzaInput {
@@ -47,16 +47,25 @@ input updatePizzasInput {
     name: String!
     origin: String!
 }
+
 input createIngredientInput {
     # id: Int!
     name: String!
+    # pizza_id:Int!
     calories: String!
 }
+
+input updateIngredientInput{
+    name:String
+    calories:String
+}
+
 type Mutation {
     createPizza(input: createPizzaInput! @spread): pizza @create
     updatePizza(id: Int!, input: updatePizzasInput! @spread): pizza @update
 
     createIngredient(input: createIngredientInput! @spread): Ingredient @create
+    updateIngredient(id:Int!,input: updateIngredientInput! @spread): Ingredient @update
 }
 # type Mutation{
 #     createPizza(name:String!):pizza @create
