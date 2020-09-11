@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ingredient extends Model
 {
 
-    protected $fillable=['name','calories'];
+    // protected $fillable=['name','calories'];
+    protected $guarded=[];
 
-    public function pizza(): BelongsTo
+    public function pizzas()
     {
-        return $this->belongsTo(pizza::class);
+        return $this->hasMany(pizza::class);
     }
 }

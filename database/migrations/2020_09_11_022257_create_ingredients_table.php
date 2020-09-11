@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIngredientTable extends Migration
+class CreateIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,7 @@ class CreateIngredientTable extends Migration
             $table->text('name')->nullable();
             $table->text('calories')->nullable();
             $table->timestamps();
-            // $table->foreign('pizza_id')->references('id')->on('pizza')->onDelete('cascade');
+            // $table->foreign('pizza_id')->references('id')->on('pizzas')->onDelete('cascade');
         });
     }
 
