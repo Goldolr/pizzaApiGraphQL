@@ -6,22 +6,11 @@ scalar DateTime
 @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
-
     pizzas: [pizza!]! @all
     pizza(id: Int! @eq): pizza @find
 
     ingredients: [Ingredient!]! @all
     ingredient(id: Int! @eq): Ingredient @find
-}
-
-type User {
-    id: Int!
-    name: String!
-    email: String!
-    created_at: DateTime!
-    updated_at: DateTime!
 }
 
 type pizza {
@@ -39,25 +28,23 @@ type Ingredient {
 }
 
 input createPizzaInput {
-    # id: Int!
     name: String!
     origin: String!
-    ingredient_id:Int!
+    ingredient_id: Int!
 }
 input createIngredientInput {
-    # id: Int!
     name: String!
-    # pizza_id:Int
     calories: String!
 }
 input updatePizzasInput {
     name: String!
     origin: String!
+    ingredient_id: Int!
 }
 
-input updateIngredientInput{
-    name:String
-    calories:String
+input updateIngredientInput {
+    name: String
+    calories: String
 }
 
 type Mutation {
@@ -65,11 +52,11 @@ type Mutation {
     createIngredient(input: createIngredientInput! @spread): Ingredient @create
 
     updatePizza(id: Int!, input: updatePizzasInput! @spread): pizza @update
-    updateIngredient(id:Int!,input: updateIngredientInput! @spread): Ingredient @update
-    
-    deletePizza(id:Int! @rules(apply:["required"])):pizza @delete
-    deleteIngredient(id:Int! @rules(apply:["required"])):Ingredient @delete 
+    updateIngredient(
+        id: Int!
+        input: updateIngredientInput! @spread
+    ): Ingredient @update
+
+    deletePizza(id: Int! @rules(apply: ["required"])): pizza @delete
+    deleteIngredient(id: Int! @rules(apply: ["required"])): Ingredient @delete
 }
-# type Mutation{
-#     createPizza(name:String!):pizza @create
-# }
