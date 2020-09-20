@@ -5,14 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ingredient extends Model
+class Ingredient extends Model
 {
-
-    // protected $fillable=['name','calories'];
-    protected $guarded=[];
-
-    public function pizzas()
+    protected $fillable = [
+        'name', 'calories','pizzas_id'
+    ];
+    public function pizzas(): BelongsTo
     {
-        return $this->hasMany(pizza::class);
+        return $this->belongsTo(Pizza::class);
     }
 }

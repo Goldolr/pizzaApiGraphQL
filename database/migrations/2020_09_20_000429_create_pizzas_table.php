@@ -14,12 +14,10 @@ class CreatePizzasTable extends Migration
     public function up()
     {
         Schema::create('pizzas', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->unsignedBigInteger('ingredient_id');
-            $table->text('name')->nullable();
-            $table->text('origin')->nullable();
+            $table->id();
+            $table->string('name');
+            $table->string('origin');
             $table->timestamps();
-            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
         });
     }
 

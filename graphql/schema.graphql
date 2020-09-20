@@ -6,57 +6,74 @@ scalar DateTime
 @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    pizzas: [pizza!]! @all
-    pizza(id: Int! @eq): pizza @find
+    pizzas: [Pizza!]! @all
+    pizza(id: ID! @eq): Pizza @find
 
     ingredients: [Ingredient!]! @all
-    ingredient(id: Int! @eq): Ingredient @find
+    ingredient(id: ID! @eq): Ingredient @find
 }
 
-type pizza {
-    id: Int!
+type Pizza {
+    id: ID!
     name: String
     origin: String
-    ingredient: Ingredient! @belongsTo
+    ingredients: [Ingredient!] @hasMany
 }
 
 type Ingredient {
-    id: Int!
+    id: ID!
     name: String
     calories: String
-    pizzas: [pizza] @hasMany
+    pizzas: Pizza @belongsTo
 }
 
-input createPizzaInput {
+input CreatePizzaInput {
     name: String!
     origin: String!
-    ingredient_id: Int!
+    ingredients: CreateIngredientsRelation!
 }
-input createIngredientInput {
+
+input CreateIngredientInput {
     name: String!
     calories: String!
 }
-input updatePizzasInput {
-    name: String!
-    origin: String!
-    ingredient_id: Int!
+
+input CreateIngredientsRelation {
+    create: [CreateIngredientInput!]
+    connect: [ID!]
 }
 
-input updateIngredientInput {
+input CreateIngredientInput {
+    name: String!
+    calories: String!
+}
+input UpdatePizzaInput {
+    id: ID!
+    name: String
+    origin: String
+    ingredients: UpdateIngredientsRelation
+}
+
+input UpdateIngredientsRelation {
+    create: [CreateIngredientInput!]
+    update: [UpdateIngredientInput!]
+    delete: [ID!]
+}
+
+input UpdateIngredientInput {
+    id:ID!
     name: String
     calories: String
 }
 
 type Mutation {
-    createPizza(input: createPizzaInput! @spread): pizza @create
-    createIngredient(input: createIngredientInput! @spread): Ingredient @create
+    createPizza(input: CreatePizzaInput! @spread): Pizza @create
+    createIngredient(input: CreateIngredientInput! @spread): Ingredient @create
 
-    updatePizza(id: Int!, input: updatePizzasInput! @spread): pizza @update
-    updateIngredient(
-        id: Int!
-        input: updateIngredientInput! @spread
-    ): Ingredient @update
+    updatePizza(input: UpdatePizzaInput! @spread): Pizza @update
+    updateIngredient(input: UpdateIngredientInput! @spread): Ingredient
+    @update
 
-    deletePizza(id: Int! @rules(apply: ["required"])): pizza @delete
-    deleteIngredient(id: Int! @rules(apply: ["required"])): Ingredient @delete
+    deletePizza(id: ID! @rules(apply: ["required"])): Pizza @delete
+    deleteIngredient(id: ID! @rules(apply: ["required"])): Ingredient @delete
 }

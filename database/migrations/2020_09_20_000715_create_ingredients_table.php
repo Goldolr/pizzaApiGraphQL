@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateIngredientsTable extends Migration
 {
@@ -14,12 +15,11 @@ class CreateIngredientsTable extends Migration
     public function up()
     {
         Schema::create('ingredients', function (Blueprint $table) {
-            $table->integer('id',true);
-            // $table->unsignedBigInteger('pizza_id');
-            $table->text('name')->nullable();
-            $table->text('calories')->nullable();
+            $table->id('id');
+            $table->unsignedBigInteger('pizzas_id')->nullable();
+            $table->string('name');
+            $table->string('calories');
             $table->timestamps();
-            // $table->foreign('pizza_id')->references('id')->on('pizzas')->onDelete('cascade');
         });
     }
 
